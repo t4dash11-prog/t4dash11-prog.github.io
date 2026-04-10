@@ -3,257 +3,627 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Para Minha Princesa ❤️</title>
+<title>Nosso Universo ❤️</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
 <style>
+* { margin:0; padding:0; box-sizing:border-box; }
+
 body {
-  margin: 0;
-  font-family: 'Segoe UI', sans-serif;
-  background: linear-gradient(135deg, #cce7ff, #eaf4ff);
-  display: flex;
-  justify-content: center;
+  font-family: 'Poppins', sans-serif;
+  height:100vh;
+  background: radial-gradient(circle at top, #0f2027, #203a43, #2c5364);
+  overflow:hidden;
 }
 
-/* CARD CENTRAL (estilo app) */
-.app {
-  width: 100%;
-  max-width: 400px;
-  min-height: 100vh;
-  background: white;
-  box-shadow: 0 0 20px rgba(0,0,0,0.1);
-  text-align: center;
-  overflow: hidden;
-}
-
+/* 🔥 FULLSCREEN */
 .container {
-  padding: 25px;
+  width:100%;
+  height:100vh;
+  padding:40px;
+  text-align:center;
+
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+
+  animation: fadeIn 0.6s ease;
 }
 
-.hidden {
-  display: none;
+.hidden { display:none; }
+
+@keyframes fadeIn {
+  from { opacity:0; transform:translateY(20px);} 
+  to { opacity:1; transform:translateY(0);} 
 }
+
+h1,h2 { color:white; }
+p { color:#ddd; }
 
 button {
-  padding: 12px 20px;
-  border: none;
-  border-radius: 20px;
-  background: #4da6ff;
-  color: white;
-  font-size: 16px;
-  cursor: pointer;
+  margin-top:20px;
+  padding:12px 25px;
+  border:none;
+  border-radius:30px;
+  background: linear-gradient(135deg,#3a7bd5,#00d2ff);
+  color:white;
+  cursor:pointer;
+  transition:0.3s;
 }
+
+button:hover { transform: scale(1.05); }
 
 input {
-  padding: 10px;
-  border-radius: 10px;
-  border: 1px solid #ccc;
+  padding:10px;
+  border-radius:10px;
+  border:none;
+  outline:none;
 }
 
-/* CORAÇÕES */
+/* envelope (inalterado) */
+.envelope {
+  width:300px;
+  height:180px;
+  margin:40px auto 120px;
+  position:relative;
+  cursor:pointer;
+}
+
+.base {
+  position:absolute;
+  width:100%;
+  height:100%;
+  background: linear-gradient(135deg,#3a7bd5,#00d2ff);
+  border-radius:10px;
+  z-index:1;
+}
+
+.flap {
+  position:absolute;
+  width:0;
+  height:0;
+  border-left:150px solid transparent;
+  border-right:150px solid transparent;
+  border-top:90px solid #3a7bd5;
+  transform-origin:top;
+  transition:0.6s;
+  z-index:3;
+}
+
+.envelope.open .flap { transform: rotateX(180deg); }
+
+/* carta (inalterado) */
+.modalCarta {
+  position:fixed;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%) scale(0.8);
+  width:min(90%,500px);
+  max-height:70vh;
+  background:#fffdf7;
+  padding:30px;
+  border-radius:15px;
+  font-family:'Great Vibes', cursive;
+  font-size:22px;
+  overflow-y:auto;
+  opacity:0;
+  pointer-events:none;
+  transition:0.4s;
+  z-index:999;
+}
+
+.modalCarta.open {
+  opacity:1;
+  transform:translate(-50%,-50%) scale(1);
+  pointer-events:auto;
+}
+
+/* contador (inalterado) */
+#contador {
+  display:flex;
+  justify-content:center;
+  gap:20px;
+  margin-top:20px;
+  font-size:18px;
+}
+
+.box {
+  background: rgba(255,255,255,0.1);
+  padding:15px;
+  border-radius:10px;
+  min-width:70px;
+}
+
+.box span {
+  display:block;
+  font-size:32px;
+  font-weight:bold;
+  background: linear-gradient(45deg,#00d2ff,#3a7bd5,#ff4d6d);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+
+.box small { color:#ccc; }
+
+/* corações */
 .heart {
-  position: fixed;
-  bottom: -10px;
-  color: pink;
+  position:fixed;
+  bottom:-10px;
   animation: float 6s linear infinite;
 }
 
-@keyframes float {
-  to { transform: translateY(-100vh); }
+@keyframes float { to { transform: translateY(-110vh); } }
+
+/* palavras finais */
+.word {
+  position:fixed;
+  font-size:28px;
+  font-weight:bold;
+  animation: float 6s linear infinite;
 }
 
-/* POLAROID */
-.gallery {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-}
+/* 🔥 GALERIA CORRIGIDA */
 
+
+/* 🔥 POLAROID REAL */
 .polaroid {
-  background: white;
-  padding: 10px;
-  margin: 15px;
-  width: 140px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-  border-radius: 10px;
-  transition: 0.3s;
+  width:180px;
+  background:white;
+  padding:10px 10px 35px;
+  border-radius:6px;
+  text-align:center;
+  position:relative;
+  box-shadow:0 10px 25px rgba(0,0,0,0.2);
 }
 
+/* imagem quadrada */
 .polaroid img {
-  width: 100%;
-  border-radius: 5px;
+  width:100%;
+  height:160px;
+  object-fit:cover;
+  border-radius:4px;
 }
 
-.polaroid:hover {
-  transform: scale(1.1);
+/* texto */
+.polaroid p {
+  margin-top:10px;
+  font-size:14px;
+  color:#333;
 }
 
-.polaroid:nth-child(odd) { transform: rotate(-5deg); }
-.polaroid:nth-child(even) { transform: rotate(5deg); }
-
-/* 💌 CARTA */
-.carta {
-  background: #fdfdfd;
-  border-radius: 15px;
-  padding: 20px;
-  box-shadow: inset 0 0 10px rgba(0,0,0,0.05);
-  animation: abrirCarta 1s ease;
+/* 📌 alfinete */
+.polaroid::before {
+  content:'';
+  width:12px;
+  height:12px;
+  background:#6ec1e4;
+  border-radius:50%;
+  position:absolute;
+  top:-6px;
+  left:50%;
+  transform:translateX(-50%);
+  box-shadow:0 2px 5px rgba(0,0,0,0.3);
 }
 
-@keyframes abrirCarta {
-  from {
-    transform: scale(0.8) rotateX(90deg);
-    opacity: 0;
-  }
+.galeria-container {
+  width:100%;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+.grupo {
+  display:none;
+  gap:40px;
+  justify-content:center;
+  align-items:center;
+}
+
+.grupo.ativo {
+  display:flex;
+}
+
+/* inclinação bonita */
+.grupo .polaroid:nth-child(1) {
+  transform: rotate(-5deg);
+}
+
+.grupo .polaroid:nth-child(2) {
+  transform: rotate(0deg);
+}
+
+.grupo .polaroid:nth-child(3) {
+  transform: rotate(5deg);
+}
+.polaroid {
+  width:180px;
+  background:white;
+  padding:10px 10px 30px;
+  border-radius:6px;
+  text-align:center;
+}
+
+.polaroid p {
+  margin-top:10px;
+  font-size:14px;
+  color:#333;
+}
+
+.controle {
+  margin-top:40px;
+  display:flex;
+  align-items:center;
+  gap:20px;
+}
+
+/* linha */
+#bolinhas {
+  position:relative;
+  width:200px;
+  height:4px;
+  background:#ffffff88;
+  border-radius:10px;
+}
+
+/* bolinhas */
+#bolinhas span {
+  position:absolute;
+  top:50%;
+  transform:translate(-50%, -50%);
+  width:12px;
+  height:12px;
+  background:white;
+  border-radius:50%;
+  transition:0.3s;
+}
+
+/* bolinha ativa */
+#bolinhas .ativo {
+  background:#ff4d6d;
+  transform:translate(-50%, -50%) scale(1.2);
+}
+
+/* efeitos finais (inalterado) */
+.heart {
+  position:fixed;
+  bottom:-10px;
+  animation: float 6s linear infinite;
+}
+
+.word {
+  position:fixed;
+  font-size:28px;
+  font-weight:bold;
+  animation: float 6s linear infinite;
+}
+
+@keyframes float { to { transform: translateY(-110vh); } }
+
+.heart-click {
+  position:fixed;
+  font-size:14px;
+  animation: subir 1s ease-out forwards;
+}
+
+@keyframes subir {
   to {
-    transform: scale(1) rotateX(0);
-    opacity: 1;
+    transform: translateY(-80px);
+    opacity:0;
   }
-}
-
-/* TEXTO DIGITANDO */
-#texto {
-  min-height: 120px;
 }
 </style>
 </head>
 
 <body>
 
-<div class="app">
-
-<!-- TELA 1 -->
 <div class="container" id="tela1">
   <h1>Oi meu amor 💌</h1>
   <p>Tenho uma surpresa pra você...</p>
-  <button onclick="abrirSenha()">Abrir</button>
+
+  <button onclick="iniciarErro()">Abrir</button>
+
+  <p id="msgErro" style="color:#ff4d6d; margin-top:15px;"></p>
+
+  <!-- barra -->
+  <div id="barraBox" style="width:250px; height:10px; background:#ffffff22; border-radius:10px; margin-top:15px; display:none;">
+    <div id="barra" style="height:100%; width:0%; background:linear-gradient(90deg,#ff4d6d,#ff85a1); border-radius:10px;"></div>
+  </div>
+
+  <p id="msgEspaco" style="margin-top:10px; display:none;">Aperta espaço 😏</p>
 </div>
 
-<!-- TELA 2 -->
 <div class="container hidden" id="tela2">
   <h2>Responda pra entrar 😏</h2>
-  <p>Quando a gente se conheceu? (dd/mm/yyyy)</p>
-  <input id="senha" placeholder="Ex: 20/01/2026">
-  <br><br>
+  <p>Quando a gente se conheceu?</p>
+  <input id="senha" placeholder="ex: 01/01/2001">
+  <br>
   <button onclick="verificar()">Entrar</button>
-  <p id="erro" style="color:red;"></p>
+  <p id="erro" style="color:red"></p>
 </div>
 
-<!-- 💌 TELA 3 (CARTA) -->
 <div class="container hidden" id="tela3">
-  <div class="carta">
-    <h2>Pra você ❤️</h2>
-    <p id="texto"></p>
+  <p>Clique na carta 💌</p>
+  <div class="envelope" onclick="abrirCarta()" id="envelope">
+    <div class="base"></div>
+    <div class="flap"></div>
   </div>
-  <br>
   <button onclick="mostrarContador()">Continuar ❤️</button>
 </div>
 
-<!-- ⏳ CONTADOR -->
 <div class="container hidden" id="telaContador">
   <h2>Olha quanto tempo já passou ❤️</h2>
-  <p id="contador" style="font-size: 24px;"></p>
+  <div id="contador"></div>
   <button onclick="irGaleria()">Ver nossos momentos 📸</button>
 </div>
 
-<!-- 📸 GALERIA -->
 <div class="container hidden" id="tela4">
   <h2>Nossos momentos 📸</h2>
-  <div class="gallery">
-    <div class="polaroid"><img src="IMG-20240809-WA0136.jpg"></div>
-    <div class="polaroid"><img src="IMG-20250112-WA0012.jpg"></div>
-    <div class="polaroid"><img src="IMG-20260327-WA0060.jpg"></div>
+  <div class="galeria-container">
+
+  <!-- GRUPO 1 -->
+  <div class="grupo ativo">
+    <div class="polaroid">
+      <img src="IMG-20240809-WA0136.jpg">
+      <p>Você..</p>
+    </div>
+
+    <div class="polaroid">
+      <img src="IMG-20250112-WA0012.jpg">
+      <p>Me..</p>
+    </div>
+
+    <div class="polaroid">
+      <img src="IMG-20240921-WA0060.jpg">
+      <p>Completa ❤️</p>
+    </div>
   </div>
+
+  <!-- GRUPO 2 -->
+  <div class="grupo">
+    <div class="polaroid"><img src="IMG-20240809-WA0088.jpg"><p>Momento</p></div>
+    <div class="polaroid"><img src="IMG-20240809-WA0096.jpg"><p>Perfeito</p></div>
+    <div class="polaroid"><img src="IMG-20240809-WA0097.jpg"><p>❤️</p></div>
+  </div>
+
+ <!-- GRUPO 3 -->
+  <div class="grupo">
+    <div class="polaroid"><img src="IMG-20240809-WA0115.jpg"><p>Momento</p></div>
+    <div class="polaroid"><img src="IMG-20240809-WA0137.jpg"><p>Perfeito</p></div>
+    <div class="polaroid"><img src="IMG-20240921-WA0049.jpg"><p>❤️</p></div>
+  </div>
+
+ <!-- GRUPO 4 -->
+  <div class="grupo">
+    <div class="polaroid"><img src="IMG-20251013-WA0055.jpg"><p>Momento</p></div>
+    <div class="polaroid"><img src="IMG-20251013-WA0056.jpg"><p>Perfeito</p></div>
+    <div class="polaroid"><img src="IMG-20260111-WA0007.jpg"><p>❤️</p></div>
+  </div>
+
+ <!-- GRUPO 5 -->
+  <div class="grupo">
+    <div class="polaroid"><img src="IMG-20260117-WA0197.jpg"><p>Momento</p></div>
+    <div class="polaroid"><img src="IMG-20260228-WA0027.jpg"><p>Perfeito</p></div>
+    <div class="polaroid"><img src="IMG-20260327-WA0060.jpg"><p>❤️</p></div>
+  </div>
+
+
+</div>
+
+<!-- CONTROLES -->
+<div class="controle">
+  <button onclick="voltar()">⬅️</button>
+
+  <div id="bolinhas"></div>
+
+  <button onclick="avancar()">➡️</button>
+</div>
+
   <button onclick="final()">Última coisa 👀</button>
 </div>
 
-<!-- FINAL -->
 <div class="container hidden" id="tela5">
   <h2>Agora é sério…</h2>
   <p>Eu te amo muito ❤️</p>
-  <p>Pra sempre, tá?</p>
-
-  <button onclick="alert('Você é minha pra sempre 😌❤️')">
-    Confirmar namoro infinito
-  </button>
+  <button onclick="alert('Você é minha pra sempre 😌❤️')">Confirmar</button>
 </div>
 
+<!-- CARTA -->
+<div class="modalCarta" id="modalCarta">
+  <p id="texto"></p>
 </div>
 
-<!-- 🎵 -->
 <audio id="musica" src="musica.mp3"></audio>
 
 <script>
-function abrirSenha() {
-  tela1.classList.add("hidden");
-  tela2.classList.remove("hidden");
+
+let progresso = 0;
+let ativado = false;
+
+function iniciarErro(){
+  msgErro.innerText = "Erro inesperado... 😳";
+  barraBox.style.display = "block";
+  msgEspaco.style.display = "block";
+  ativado = true;
 }
 
-function verificar() {
-  let senha = document.getElementById("senha").value;
-  
-  if (senha === "13/05/2024") {
-    tela2.classList.add("hidden");
-    tela3.classList.remove("hidden");
-    musica.play();
-    calcularTempo();
-    escreverTexto();
-  } else {
-    erro.innerText = "Errou 😒 tenta de novo kkk";
+/* detectar espaço */
+document.addEventListener('keydown', (e)=>{
+  if(e.code === 'Space' && ativado){
+
+    if(progresso >= 100) return;
+
+    progresso += 5;
+    barra.style.width = progresso + "%";
+
+    // coração pequeno
+    let h = document.createElement('div');
+    h.className = 'heart-click';
+    h.innerText = '❤️';
+
+    h.style.left = (window.innerWidth/2 + (Math.random()*100-50)) + 'px';
+    h.style.top = (window.innerHeight/2 + (Math.random()*100-50)) + 'px';
+
+    document.body.appendChild(h);
+    setTimeout(()=>h.remove(),1000);
+
+    // completou
+    if(progresso >= 100){
+      msgErro.innerText = "Boa 😌";
+      setTimeout(()=>{
+        tela1.classList.add('hidden');
+        tela2.classList.remove('hidden');
+      },500);
+    }
   }
+});
+
+let cartaAberta=false;
+
+function abrirSenha(){ tela1.classList.add('hidden'); tela2.classList.remove('hidden'); }
+
+function verificar(){
+  if(senha.value==='13/05/2024'){
+    tela2.classList.add('hidden');
+    tela3.classList.remove('hidden');
+    musica.play();
+    escreverTexto();
+    calcularTempo();
+  } else erro.innerText='Errou 😒';
 }
 
-/* ⌨️ TEXTO DIGITANDO */
-function escreverTexto() {
-  const texto = "Desde que eu te conheci, tudo ficou mais leve...\n\nVocê é a pessoa que me faz rir até quando não quero 😂\n\nEu amo quando você briga comigo (mesmo estando errada 😌)\n\nAmo quando você rouba minha comida 😒❤️\n\nE principalmente… amo você sendo você.";
+function abrirCarta(){
+  if(cartaAberta) return;
+  modalCarta.classList.add('open');
+  cartaAberta=true;
+}
 
-  let i = 0;
-  const speed = 40;
+function escreverTexto(){
+  const textoMsg = "Desde que eu te conheci, tudo ficou mais leve...\n\nVocê é a pessoa que me faz rir até quando não quero 😂\n\nEu amo quando você briga comigo (mesmo estando errada 😌)\n\nAmo quando você rouba minha comida 😒❤️\n\nE principalmente… amo você sendo você.";
 
-  function digitar() {
-    if (i < texto.length) {
-      document.getElementById("texto").innerHTML += texto.charAt(i) === "\n" ? "<br>" : texto.charAt(i);
+  let i=0;
+  texto.innerHTML='';
+
+  function digitar(){
+    if(i<textoMsg.length){
+      texto.innerHTML += textoMsg[i] === '\n' ? '<br>' : textoMsg[i];
       i++;
-      setTimeout(digitar, speed);
+      setTimeout(digitar,40);
     }
   }
 
-  document.getElementById("texto").innerHTML = "";
   digitar();
 }
 
-/* ⏳ CONTADOR */
-function calcularTempo() {
-  let inicio = new Date("2024-05-13");
-  let hoje = new Date();
-  let dias = Math.floor((hoje - inicio) / (1000 * 60 * 60 * 24));
-  contador.innerText = dias + " dias ao seu lado ❤️";
+function fecharCarta(){
+  modalCarta.classList.remove('open');
+  cartaAberta = false;
 }
 
-function mostrarContador() {
-  tela3.classList.add("hidden");
-  telaContador.classList.remove("hidden");
+function mostrarContador(){
+  if(!cartaAberta){ alert('Abre a carta primeiro 😠'); return; }
+  fecharCarta(); // 👈 ADICIONADO
+  tela3.classList.add('hidden');
+  telaContador.classList.remove('hidden');
 }
 
-function irGaleria() {
-  telaContador.classList.add("hidden");
-  tela4.classList.remove("hidden");
+function calcularTempo(){
+  function atualizar(){
+    let inicio=new Date('2024-05-13T00:00:00');
+    let agora=new Date();
+    let diff=agora-inicio;
+
+    let dias=Math.floor(diff/(1000*60*60*24));
+    let horas=Math.floor((diff/(1000*60*60))%24);
+    let minutos=Math.floor((diff/(1000*60))%60);
+    let segundos=Math.floor((diff/1000)%60);
+
+    contador.innerHTML = `
+      <div class="box"><span>${dias}</span><small>Dias</small></div>
+      <div class="box"><span>${horas}</span><small>Horas</small></div>
+      <div class="box"><span>${minutos}</span><small>Min</small></div>
+      <div class="box"><span>${segundos}</span><small>Seg</small></div>
+    `;
+  }
+
+  atualizar();
+  setInterval(atualizar,1000);
 }
 
-function final() {
-  tela4.classList.add("hidden");
-  tela5.classList.remove("hidden");
+function irGaleria(){ telaContador.classList.add('hidden'); tela4.classList.remove('hidden'); }
+
+function final(){
+  tela4.classList.add('hidden');
+  tela5.classList.remove('hidden');
+
+  const palavras=["Amor","Te amo","Minha vida","❤️","Pra sempre"];
+  const cores=["#ff4d6d","#ff85a1","#ffd166","#c77dff","#7df9ff"];
+
+  setInterval(()=>{
+    let w=document.createElement('div');
+    w.className='word';
+    w.innerText=palavras[Math.floor(Math.random()*palavras.length)];
+    w.style.left=Math.random()*100+'vw';
+    w.style.color=cores[Math.floor(Math.random()*cores.length)];
+    document.body.appendChild(w);
+    setTimeout(()=>w.remove(),6000);
+  },300);
 }
 
-/* ❤️ CORAÇÕES */
-setInterval(() => {
-  let heart = document.createElement("div");
-  heart.classList.add("heart");
-  heart.innerText = "❤️";
-  heart.style.left = Math.random() * 100 + "vw";
-  document.body.appendChild(heart);
-  setTimeout(() => heart.remove(), 6000);
-}, 500);
+setInterval(()=>{
+  let h=document.createElement('div');
+  h.className='heart';
+  h.innerText='❤️';
+  h.style.left=Math.random()*100+'vw';
+  document.body.appendChild(h);
+  setTimeout(()=>h.remove(),6000);
+},400);
+
+let grupoAtual = 0;
+const grupos = document.querySelectorAll('.grupo');
+const bolinhas = document.getElementById('bolinhas');
+
+// criar bolinhas
+grupos.forEach((_, i) => {
+  let b = document.createElement('span');
+
+  // posição na linha
+  let pos = (i / (grupos.length - 1)) * 100;
+  b.style.left = pos + "%";
+
+  if(i === 0) b.classList.add('ativo');
+
+  bolinhas.appendChild(b);
+});
+
+function atualizarGaleria(){
+  grupos.forEach(g => g.classList.remove('ativo'));
+  grupos[grupoAtual].classList.add('ativo');
+
+  let dots = bolinhas.querySelectorAll('span');
+  dots.forEach(d => d.classList.remove('ativo'));
+  dots[grupoAtual].classList.add('ativo');
+}
+
+function avancar(){
+  if(grupoAtual < grupos.length - 1){
+    grupoAtual++;
+    atualizarGaleria();
+  } else {
+    final(); // vai pra tela final
+  }
+}
+
+function voltar(){
+  if(grupoAtual > 0){
+    grupoAtual--;
+    atualizarGaleria();
+  }
+}
+
 </script>
+
 
 </body>
 </html>
